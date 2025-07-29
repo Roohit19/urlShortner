@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.teleso.urlshortner.UrlshortnerApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.868 s -- in com.teleso.urlshortner.UrlshortnerApplicationTests

@@ -46,12 +46,42 @@ button {
 button:hover {
 	background-color: #0056b3;
 }
+
+.error-message {
+	background-color: #f8d7da;
+	color: #721c24;
+	padding: 10px;
+	border-radius: 4px;
+	margin-bottom: 15px;
+	border: 1px solid #f5c6cb;
+}
+
+.user-info {
+	margin-bottom: 20px;
+	padding: 10px;
+	background: #e7f3ff;
+	border-radius: 8px;
+}
+
+.login-link {
+	margin-top: 15px;
+	padding: 8px 16px;
+	background: #28a745;
+	color: white;
+	text-decoration: none;
+	border-radius: 4px;
+	display: inline-block;
+}
+
+.login-link:hover {
+	background: #1e7e34;
+}
 </style>
 <script>
 	function validateForm() {
 		const urlInput = document.getElementById("originalUrl").value.trim();
-		if (!urlInput || !/^https?:\/\/.+\..+/.test(urlInput)) {
-			alert("❌ Please enter a valid URL starting with http:// or https://");
+		if (!urlInput) {
+			alert("❌ Please enter a URL");
 			return false;
 		}
 		return true;
@@ -60,10 +90,38 @@ button:hover {
 </head>
 <body>
 	<div class="container">
-		<h2>🔗 URL Shortener</h2>
+		<h2>URL Shortener</h2>
+		<!-- Show only if user get logged in here  -->
+		<div th:if="${token}" class="user-info">
+			<strong>Logged in!</strong> You can now create custom URLs.
+		</div>
+
+		<!-- Show login option if anonymous -->
+		<div th:unless="${token}" class="user-info">
+			<strong>Anonymous Mode</strong> - Random short codes only <br> <a
+				href="/auth/login" class="login-link">Login for Custom URLs</a>
+		</div>
+
+		<!-- Display backend validation errors -->
+		<div th:if="${error}" class="error-message" th:text="${error}"></div>
+
+		<!-- CHANGED: Updated form to include custom code input for logged-in users -->
 		<form action="/shorten" method="post" onsubmit="return validateForm()">
-			<input type="text" name="originalUrl" id="originalUrl"
-				placeholder="Enter URL here" />
+			<!-- Only include token if it exists -->
+			<input th:if="${token}" type="hidden" name="token"
+				th:value="${token}" /> <input type="text" name="originalUrl"
+				id="originalUrl" placeholder="Enter URL here" />
+
+			<!-- ADDED: Custom URL input - only show for logged in users -->
+			<div th:if="${token}">
+				<input type="text" name="customCode" id="customCode"
+					placeholder="Enter custom short code (optional)"
+					style="margin-top: 10px; margin-bottom: 10px;" /> <small
+					style="color: #666; font-size: 12px; display: block; margin-bottom: 15px;">
+					3-20 characters. Letters, numbers, hyphens, underscores only. Leave
+					blank for random code. </small>
+			</div>
+
 			<button type="submit">Shorten URL</button>
 		</form>
 	</div>
