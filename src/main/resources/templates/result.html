@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Shortened URL</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+body {
+	font-family: 'Segoe UI', sans-serif;
+	background-color: #eaf0f6;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.result-box {
+	background: white;
+	padding: 30px 40px;
+	border-radius: 12px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	max-width: 450px;
+	width: 100%;
+}
+
+.short-url {
+	font-size: 18px;
+	color: #333;
+	margin: 20px 0;
+	word-break: break-all;
+}
+
+button {
+	padding: 10px 20px;
+	background-color: #28a745;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #1e7e34;
+}
+</style>
+<script>
+        function copyToClipboard() {
+            const url = document.getElementById("shortUrl").innerText;
+            navigator.clipboard.writeText(url).then(() => {
+                alert("✅ Shortened URL copied to clipboard!");
+            }).catch(err => {
+                alert("❌ Failed to copy the URL.");
+            });
+        }
+    </script>
+</head>
+<body>
+	<div class="result-box">
+		<h2>✅ Your Shortened URL</h2>
+		<p id="shortUrl" class="short-url" th:text="${shortUrl}">Short URL
+			will be shown here</p>
+		<button onclick="copyToClipboard()">Copy to Clipboard</button>
+	</div>
+</body>
+</html>
