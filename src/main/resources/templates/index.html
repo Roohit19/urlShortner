@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>URL Shortener</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+body {
+	font-family: 'Segoe UI', sans-serif;
+	background: #f4f7fa;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.container {
+	background: #fff;
+	padding: 30px 40px;
+	border-radius: 12px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	width: 100%;
+	max-width: 400px;
+}
+
+input[type="text"] {
+	padding: 12px;
+	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	margin-bottom: 20px;
+	font-size: 16px;
+}
+
+button {
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #0056b3;
+}
+</style>
+<script>
+	function validateForm() {
+		const urlInput = document.getElementById("originalUrl").value.trim();
+		if (!urlInput || !/^https?:\/\/.+\..+/.test(urlInput)) {
+			alert("❌ Please enter a valid URL starting with http:// or https://");
+			return false;
+		}
+		return true;
+	}
+</script>
+</head>
+<body>
+	<div class="container">
+		<h2>🔗 URL Shortener</h2>
+		<form action="/shorten" method="post" onsubmit="return validateForm()">
+			<input type="text" name="originalUrl" id="originalUrl"
+				placeholder="Enter URL here" />
+			<button type="submit">Shorten URL</button>
+		</form>
+	</div>
+</body>
+</html>

@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class UrlShortenerService {
 
 	private static final String BASE62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	private static final int SHORT_CODE_LENGTH = 6;
+	private static final int SHORT_CODE_LENGTH = 4;
 
 	private final Map<String, String> shortToOriginal = new ConcurrentHashMap<>();
 	private final Map<String, String> originalToShort = new ConcurrentHashMap<>();
