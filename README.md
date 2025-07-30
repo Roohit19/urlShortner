@@ -29,14 +29,14 @@ Access the application
 
 Open your browser and navigate to
 API's
-for login
+for  use login
 http://localhost:4444/auth/login
+for annonymous generation http://localhost:4444/
 
 
-
-🧪 Testing
+Testing
 Run All Tests
-bashmvn test
+bash mvn test
 Test Coverage
 
 Controller Tests: 10 comprehensive test cases covering all endpoints
@@ -61,13 +61,6 @@ originalUrl (required): The URL to shorten
 token (optional): JWT token for authenticated users
 customCode (optional): Custom short code (requires authentication)
 
-🔐 Security Features
-
-JWT Authentication: Secure token-based authentication
-Input Validation: Comprehensive URL and custom code validation
-XSS Protection: Safe HTML rendering and input sanitization
-CSRF Protection: Built-in Spring Security CSRF protection
-Rate Limiting: Prevents abuse through validation layers
 
 📊 Technical Specifications
 URL Validation
@@ -79,58 +72,26 @@ Malformed URL Detection: Comprehensive URL parsing
 
 Short Code Generation
 
-Character Set: Base62 (0-9, a-z, A-Z)
 Default Length: 4 characters
 Custom Code Length: 3-20 characters
-Collision Handling: Automatic regeneration for duplicates
 
 Storage
 
 In-Memory: ConcurrentHashMap for thread-safe operations
 Bidirectional Mapping: Original URL ↔ Short Code
-No External Dependencies: No ORM or database required
 
-🛠️ Configuration
 Application Properties
-properties# Server Configuration
+
 server.port=4444
 
-# Application Configuration
-app.base-url=https://yourdomain.com
-
-# JWT Configuration
-jwt.secret=your-secret-key-minimum-256-bits
-jwt.expiration=86400000
-Environment Variables
-
-APP_BASE_URL: Base URL for short link generation
-JWT_SECRET: Secret key for JWT token signing
-JWT_EXPIRATION: Token expiration time in milliseconds
-
-🚀 Deployment
-Docker Support
-dockerfileFROM openjdk:17-jdk-slim
-COPY target/urlshortner-0.0.1-SNAPSHOT.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app.jar"]
-Build Docker Image
-bashdocker build -t urlshortner .
-docker run -p 8080:8080 urlshortner
-📈 Performance Considerations
-
-Concurrent Access: Thread-safe ConcurrentHashMap implementation
-Memory Usage: Efficient in-memory storage with O(1) lookups
-Response Time: Average response time < 50ms
-Scalability: Horizontally scalable with external storage
 
 
-📋 Development Workflow
 
-GitHub Issues: Track features and bugs
-Git Branches: Feature-based development
-Pull Requests: Code review and integration
-GitHub Actions: Automated CI/CD pipeline
-Unit Tests: Comprehensive test coverage
+
+
+
+
+
 
 
 
